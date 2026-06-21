@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Benchmarking Image Aesthetic Assessment from Scoring to Reasoning — project page and unified evaluation benchmark.">
+  <title>From Scoring to Reasoning — Image Aesthetic Assessment</title>
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="stylesheet" href="static/css/index.css?v=20260621-4">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Back to top"><span>A.</span> evaluation</a>
+    <nav aria-label="Primary navigation">
+      <a href="#overview" data-nav="overview"><span>01</span>Overview</a>
+      <a href="#evolution" data-nav="evolution"><span>02</span>Evolution</a>
+      <a href="#taxonomy" data-nav="taxonomy"><span>03</span>Taxonomy</a>
+      <a href="#benchmark" data-nav="benchmark"><span>04</span>Benchmark</a>
+      <a href="#findings" data-nav="findings"><span>05</span>Findings</a>
+      <a href="#reasoning" data-nav="reasoning"><span>06</span>Reasoning</a>
+    </nav>
+    <div class="header-actions">
+      <a class="nav-cta paper-link" href="static/papers/Cell_Patterns__LLM_Aesthetic.pdf">Paper ↓</a>
+      <a class="nav-cta" href="https://github.com/An-Moon/Aesthetic-evaluation">Code ↗</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero academic-hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span>Research paper</span> · survey, taxonomy &amp; unified benchmark</p>
+        <h1>Benchmarking Image Aesthetic Assessment <em>from Scoring to Reasoning</em></h1>
+        <p class="dek">A systematic study of how Image Aesthetic Assessment evolves from scalar prediction to language-based, visually grounded aesthetic reasoning.</p>
+        <div class="authors academic-authors" aria-label="Authors">
+          <span>Xuanwei Hu<sup>1</sup></span><span>Haoyu Dong<sup>1</sup></span><span>Jiayi Jiang<sup>1</sup></span><span>Tianyi Liu<sup>2</sup></span>
+          <span>Jianjun Gao<sup>2</sup></span><span>Kejun Wu<sup>1,2,*</sup></span><span>Chengtao Cai<sup>3</sup></span><span>Xiaoli Li<sup>4</sup></span>
+        </div>
+        <div class="affiliations">
+          <span><sup>1</sup> Huazhong University of Science and Technology</span>
+          <span><sup>2</sup> Nanyang Technological University</span>
+          <span><sup>3</sup> Harbin Engineering University</span>
+          <span><sup>4</sup> Singapore University of Technology and Design</span>
+          <span style="font-size: 11px; color: #e86b3a;">
+            <sup style="color: #e86b3a;">*</sup> Corresponding author: kjwu@hust.edu.cn
+          </span>
+        </div>
+        <div class="hero-actions">
+          <a class="button primary academic-button" href="static/papers/Cell_Patterns__LLM_Aesthetic.pdf"><span><b>Paper</b><small>PDF · 36 pages</small></span><i>↓</i></a>
+          <a class="button code-button academic-button" href="https://github.com/An-Moon/Aesthetic-evaluation"><span><b>Code</b><small>Evaluation Pipelines</small></span><i>↗</i></a>
+        </div>
+        <div class="paper-facts">
+          <span><b>3</b> model families</span><span><b>3</b> public benchmarks</span><span><b>2</b> evaluation tracks</span>
+        </div>
+      </div>
+
+      <div class="hero-visual academic-gallery reveal delay-1">
+        <figure class="gallery-tall"><img src="static/images/paper/case-taj-mahal.jpg" alt="Taj Mahal framed through a dark arch, from the paper's UNIAA example"><figcaption>Framing · depth</figcaption></figure>
+        <figure><img src="static/images/paper/case-flowers.jpg" alt="Bright pink flowers from the TAD66K examples"><figcaption>Color · contrast</figcaption></figure>
+        <figure><img src="static/images/paper/case-salt-flat.jpg" alt="A person on a salt flat at sunrise from the VQA examples"><figcaption>Light · scale</figcaption></figure>
+        <figure><img src="static/images/paper/case-bokeh.jpg" alt="Blue bokeh macro photograph from the VQA examples"><figcaption>Palette · focus</figcaption></figure>
+        <figure class="gallery-wide"><img src="static/images/paper/case-river-skyline.jpg" alt="City skyline reflected in a river from the TAD66K examples"><figcaption>Balance · reflection</figcaption></figure>
+        <div class="gallery-question"><span>The central question</span><b>Can a model <em>justify</em> an aesthetic judgment with visual evidence?</b></div>
+        <div class="critique-card gallery-critique">
+          <div class="critique-tabs" role="tablist" aria-label="Aesthetic assessment modes">
+            <button class="is-active" data-critique="score" role="tab">Score</button>
+            <button data-critique="describe" role="tab">Describe</button>
+            <button data-critique="reason" role="tab">Reason</button>
+          </div>
+          <div id="critique-content" class="critique-content">
+            <span class="score-number">8.2</span><span class="score-unit">/ 10</span>
+            <p>Illustrative output—not a benchmark result. A score says <em>how much</em>, not <em>why</em>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement reveal">
+      <p class="eyebrow">The question behind the benchmark</p>
+        <blockquote>Future IAA should connect reliable score prediction with visually grounded aesthetic reasoning, rather than treating scoring and explanation as separate outputs.</blockquote>        <div class="statement-foot">
+        <span>Score prediction</span><i></i><span>Visual grounding</span><i></i><span>Aesthetic reasoning</span>
+      </div>
+    </section>
+
+    <section id="overview" class="section paper-figure-section" data-nav-section>
+      <div class="section-heading compact reveal">
+        <p class="eyebrow">01 · Overview</p>
+        <h2>What does it mean<br>to assess aesthetics?</h2>
+        <p>IAA is broader than image quality. It spans composition, color, emotional resonance, subjectivity, scoring, description, and question answering.</p>
+      </div>
+      <figure class="paper-figure reveal">
+        <img src="static/images/paper/fig1_iaa_overview.png" alt="Figure 1 from the paper: an intuitive overview of Image Aesthetic Assessment using The Starry Night">
+        <figcaption><b>Figure 1.</b> An intuitive overview of Image Aesthetic Assessment using Van Gogh’s <em>The Starry Night</em>. Extracted directly from the paper.</figcaption>
+      </figure>
+    </section>
+
+    <section id="evolution" class="section shift-section evolution-section" data-nav-section>
+      <div class="section-heading reveal">
+        <p class="eyebrow">02 · Evolution</p>
+        <h2>From score prediction to aesthetic reasoning.</h2>
+        <p>The cards summarize what changed in the task itself. The paper timeline below shows when those changes happened and which methods and datasets carried them forward.</p>
+      </div>
+
+      <div class="era-track reveal">
+        <article class="era-card">
+          <div class="era-index">I</div>
+          <p class="era-years">Task form</p>
+          <h3>Score</h3>
+          <p>Map visual features directly to a scalar human rating.</p>
+          <div class="era-kv"><span><small>Input</small>Image</span><span><small>Output</small>7.8 / 10</span><span><small>Limitation</small>Little explanation</span></div>
+        </article>
+        <div class="era-arrow" aria-hidden="true">→</div>
+        <article class="era-card accent-blue">
+          <div class="era-index">II</div>
+          <p class="era-years">Representation</p>
+          <h3>Align</h3>
+          <p>Connect images with aesthetic language and preference signals.</p>
+          <div class="era-kv"><span><small>Input</small>Image + text</span><span><small>Output</small>Similarity / preference</span><span><small>Limitation</small>Limited structured critique</span></div>
+        </article>
+        <div class="era-arrow" aria-hidden="true">→</div>
+        <article class="era-card accent-orange">
+          <div class="era-index">III</div>
+          <p class="era-years">Judgment</p>
+          <h3>Reason</h3>
+          <p>Generate attributes, answers, scores, and evidence-based critiques.</p>
+          <div class="era-kv"><span><small>Input</small>Image + query</span><span><small>Output</small>Grounded explanation</span><span><small>Limitation</small>Score calibration</span></div>
+        </article>
+      </div>
+      <p class="timeline-note reveal"><span>What changed</span> is summarized above. <span>When it changed</span>—and the representative literature—is shown in the paper’s timeline.</p>
+      <figure class="paper-figure timeline-figure reveal">
+        <img src="static/images/paper/fig2_timeline.png" alt="Figure 2 from the paper: evolution timeline of Image Aesthetic Assessment">
+        <figcaption><b>Figure 2.</b> The field’s progression from conventional score prediction to vision-language alignment and MLLM-based aesthetic reasoning.</figcaption>
+      </figure>
+    </section>
+
+    <section id="taxonomy" class="section taxonomy-section" data-nav-section>
+      <div class="section-heading compact reveal">
+        <p class="eyebrow">03 · Taxonomy</p>
+        <h2>From field taxonomy<br>to experimental evidence.</h2>
+        <p>The survey and benchmark share one structure: methods define the capabilities, datasets define the tasks, and evaluation reveals where each paradigm succeeds or fails.</p>
+      </div>
+      <div class="paper-map reveal">
+        <div class="taxonomy-notes">
+          <article><span>Methods</span><b>Conventional → Alignment → Reasoning</b><p>Organizes IAA by the form of intelligence it supports.</p></article>
+          <article><span>Foundations</span><b>Datasets + evaluation metrics</b><p>Connects task definitions to measurable evidence.</p></article>
+          <article><span>Experiments</span><b>Scoring + UNIAA-Bench</b><p>Tests numerical prediction and language-based assessment together.</p></article>
+        </div>
+        <figure id="taxonomy-figure" class="paper-figure"><img src="static/images/paper/fig3_paper_structure.png" alt="Figure 3 from the paper: overview of the paper structure"><figcaption><b>Figure 3.</b> Major sections, subsections, and core themes.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="benchmark" class="section benchmark-section" data-nav-section>
+      <div class="section-heading compact reveal">
+        <p class="eyebrow">04 · Unified Benchmark</p>
+        <h2>Test both sides<br>of aesthetic intelligence.</h2>
+      </div>
+      <div class="benchmark-map reveal">
+        <div class="model-column">
+          <p class="map-label">Three model families</p>
+          <div class="model-pill"><span>01</span><b>Score-centric vision</b><small>MUSIQ · EAT · TANet · VILA</small></div>
+          <div class="model-pill"><span>02</span><b>General MLLMs</b><small>InternVL · Qwen-VL · LLaVA</small></div>
+          <div class="model-pill"><span>03</span><b>IAA-specific MLLMs</b><small>UNIAA · ArtiMuse · ArtQuant +</small></div>
+        </div>
+        <div class="map-connector" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="task-core">
+          <span>UNIFIED<br>EVALUATION</span>
+        </div>
+        <div class="map-connector right" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="task-column">
+          <p class="map-label">Two complementary tracks</p>
+          <div class="task-card"><span class="task-icon">7.6</span><div><b>Score prediction</b><small>AVA · 19,930 test images</small><small>TAD66K · 14,079 test images</small></div></div>
+          <div class="task-card"><span class="task-icon text-icon">Aa</span><div><b>Language-based assessment</b><small>UNIAA descriptions</small><small>UNIAA perception VQA</small></div></div>
+        </div>
+      </div>
+      <div class="metric-ribbon reveal">
+        <span>Rank agreement <b>PLCC · SRCC · KROCC</b></span>
+        <span>Error <b>MAE · MSE · RMSE</b></span>
+        <span>Text overlap <b>ROUGE · BLEU · METEOR</b></span>
+        <span>Meaning <b>BERTScore · SBERT</b></span>
+      </div>
+      <figure class="paper-figure benchmark-examples reveal">
+        <img src="static/images/paper/fig5_benchmark_examples.png" alt="Figure 5 from the paper: score-level, VQA-style, and language-based benchmark examples">
+        <figcaption><b>Figure 5.</b> The unified view spans scalar ratings, focused aesthetic perception questions, and detailed language-based reasoning.</figcaption>
+      </figure>
+    </section>
+
+    <section id="findings" class="section findings-section" data-nav-section>
+      <div class="section-heading reveal">
+        <p class="eyebrow">05 · Key Findings</p>
+        <h2>Reasoning does not replace<br>reliable score prediction.</h2>
+        <p>The results resist a single leaderboard. Strong regression, useful explanation, and cross-dataset robustness are related—but not interchangeable.</p>
+      </div>
+
+      <article class="finding finding-bars reveal">
+        <div class="finding-copy">
+          <span class="finding-no">01</span>
+          <h3>Score-centric models still lead.</h3>
+          <p>On AVA, score-centric models remain substantially more consistent with human rankings than general MLLMs. Language fluency alone does not create a reliable regressor.</p>
+          <div class="takeaway"><b>Key idea</b> Aesthetic explanation and score regression remain different capabilities.</div>
+        </div>
+        <div class="bar-chart" aria-label="AVA average correlation across PLCC, SRCC, and KROCC">
+          <div class="chart-head"><span>AVA · mean(PLCC, SRCC, KROCC)</span><small>Table 6 · higher is better →</small></div>
+          <div class="bar-row"><b>EAT</b><div><i style="--value:81.5%"></i></div><span>0.815</span></div>
+          <div class="bar-row"><b>MUSIQ</b><div><i style="--value:75.8%"></i></div><span>0.758</span></div>
+          <div class="bar-row warm"><b>OneAlign</b><div><i style="--value:75.7%"></i></div><span>0.757</span></div>
+          <div class="bar-row warm"><b>UNIAA</b><div><i style="--value:65.9%"></i></div><span>0.659</span></div>
+          <div class="bar-row cool"><b>LLaVA</b><div><i style="--value:40.7%"></i></div><span>0.407</span></div>
+          <div class="chart-legend"><span><i></i>score-centric</span><span class="warm"><i></i>IAA-specific</span><span class="cool"><i></i>general MLLM</span></div>
+        </div>
+      </article>
+
+      <div class="finding-grid">
+        <article class="finding-card reveal">
+          <span class="finding-no">02</span>
+          <h3>Scale helps ranking—<br>not every error metric.</h3>
+          <p>Qwen3-VL grows more aligned with human ordering from 2B to 30B, while absolute score errors fluctuate.</p>
+          <div class="scale-plot" aria-label="Qwen3-VL scale versus AVA PLCC">
+            <svg viewBox="0 0 500 190" role="img">
+              <path class="gridline" d="M25 150H475M25 100H475M25 50H475"/>
+              <path class="trend" d="M45 135 L185 79 L315 72 L455 34"/>
+              <g><circle cx="45" cy="135" r="7"/><text x="45" y="168">2B</text><text x="45" y="121">0.358</text></g>
+              <g><circle cx="185" cy="79" r="7"/><text x="185" y="168">4B</text><text x="185" y="65">0.423</text></g>
+              <g><circle cx="315" cy="72" r="7"/><text x="315" y="168">8B</text><text x="315" y="58">0.430</text></g>
+              <g><circle cx="455" cy="34" r="7"/><text x="455" y="168">30B</text><text x="455" y="20">0.474</text></g>
+            </svg>
+            <small>Qwen3-VL on AVA · PLCC</small>
+          </div>
+        </article>
+
+        <article class="finding-card dark-card reveal delay-1">
+          <span class="finding-no">03</span>
+          <h3>In-domain gains<br>do not ensure transfer.</h3>
+          <p>Fine-tuning on the evaluation dataset lifts correlation, but the advantage shrinks when AVA-trained models meet TAD66K—and vice versa.</p>
+          <div class="transfer-visual" aria-label="ArtiMuse-AVA PLCC drops from 0.825 on AVA to 0.455 on TAD66K, a relative decrease of 44.8 percent">
+            <div class="transfer-row in-domain">
+              <div class="transfer-route"><b>AVA → AVA</b><span>in-domain evaluation</span></div>
+              <div class="transfer-measure"><div class="transfer-score"><b>0.825</b><span>PLCC</span></div><div class="transfer-track"><span style="--score:82.5%"></span></div></div>
+            </div>
+            <div class="transfer-drop"><span>cross-dataset penalty</span><b>−0.370</b><small>−44.8%</small></div>
+            <div class="transfer-row cross-domain">
+              <div class="transfer-route"><b>AVA → TAD66K</b><span>cross-dataset evaluation</span></div>
+              <div class="transfer-measure"><div class="transfer-score"><b>0.455</b><span>PLCC</span></div><div class="transfer-track"><span style="--score:45.5%"></span></div></div>
+            </div>
+          </div>
+          <small class="card-note">ArtiMuse-AVA · Table 10 · common 0–1 scale</small>
+        </article>
+      </div>
+      <div class="reported-figures reveal">
+        <figure class="paper-figure"><img src="static/images/paper/fig6_score_scatter.png" alt="Figure 6 from the paper: score prediction correlation versus error"><figcaption><b>Figure 6.</b> Score prediction performance: correlation versus normalized error.</figcaption></figure>
+        <figure class="paper-figure"><img src="static/images/paper/fig8_cross_dataset.png" alt="Figure 8 from the paper: cross-dataset generalization comparison"><figcaption><b>Figure 8.</b> In-domain fine-tuning helps; cross-dataset transfer remains limited.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="reasoning" class="section reasoning-section" data-nav-section>
+      <div class="section-heading compact reveal">
+        <p class="eyebrow">06 · Reasoning Evaluation</p>
+        <h2>No single metric<br>can judge a critique.</h2>
+        <p>Word overlap, semantic alignment, and perception accuracy each reveal a different slice of performance.</p>
+      </div>
+
+      <div class="metric-lenses reveal">
+        <article><span class="lens-icon">“ ”</span><h3>Lexical</h3><p>Does the wording overlap with a reference?</p><small>Useful for surface match</small></article>
+        <article><span class="lens-icon">≈</span><h3>Semantic</h3><p>Does the response preserve the intended meaning?</p><small>Better for paraphrase</small></article>
+        <article><span class="lens-icon">?</span><h3>Perception</h3><p>Can the model answer a focused aesthetic question?</p><small>Tests visual understanding</small></article>
+        <article><span class="lens-icon">◎</span><h3>Visual Grounding</h3><p>Is the explanation tied to visible evidence?</p><small>Open evaluation challenge</small></article>
+      </div>
+
+      <div class="reasoning-demo reveal">
+        <div class="demo-image"><img src="static/images/aesthetic-window.jpg" alt="Budapest cityscape used in the paper's qualitative comparison"><span>same image · same prompt</span></div>
+        <div class="demo-copy comparison-copy">
+          <p class="prompt">“Describe and evaluate the aesthetic attributes in detail.”</p>
+          <div class="annotation-key comparison-legend"><span class="grounded">specific visual evidence</span><span class="generic">generic appraisal</span></div>
+          <div class="output-list">
+            <article class="model-output">
+              <header><b>UNIAA</b><small>IAA-specific MLLM</small></header>
+              <p>“A <mark>well-composed travel photograph</mark> of Budapest… The use of the camera is <mark class="generic">commendable</mark>, and the color and lighting are <mark class="generic">well-executed</mark>, with <mark>the arches framing the cityscape and creating a sense of depth</mark>.”</p>
+            </article>
+            <article class="model-output">
+              <header><b>ArtQuant</b><small>IAA-specific MLLM</small></header>
+              <p>“A captivating <mark>view through a window</mark>, showcasing a <mark class="generic">prominent castle-like structure</mark>. <mark>The arched opening frames the scene</mark>, while the <mark>soft and muted palette</mark> evokes a serene atmosphere.”</p>
+            </article>
+            <article class="model-output">
+              <header><b>ArtiMuse</b><small>IAA-specific MLLM</small></header>
+              <p>“A grand, historic building <mark>framed by an archway</mark>, creating depth and perspective. The composition <mark>uses the arch to draw the viewer’s eye</mark> toward the central structure, while the muted palette supports a serene atmosphere.”</p>
+            </article>
+            <article class="model-output">
+              <header><b>LLaVA-OneVision</b><small>General MLLM</small></header>
+              <p>“The <mark>Hungarian Parliament Building is the focal point</mark>; its spires and domes are highlighted by soft overcast light. The arch creates a <mark>natural vignette effect</mark>, while the river adds a serene element to the composition.”</p>
+            </article>
+            <article class="model-output">
+              <header><b>Qwen-VL</b><small>General MLLM</small></header>
+              <p>“The dark, arched opening <mark>acts as a natural vignette</mark>, drawing the eye directly to the Parliament Building. The arch and building symmetry create an <mark class="generic">almost classical composition</mark>; the <mark>muted gray-blue palette</mark> lends a somber, contemplative mood.”</p>
+            </article>
+          </div>
+          <p class="comparison-conclusion"><b>What this comparison shows.</b> The image and prompt are held constant, so the differences come from how each model constructs its critique. All five produce fluent aesthetic prose, but their specificity varies: generic praise such as “well-executed” says little about visual support, while stronger passages identify the arch, Parliament Building, symmetry, river, and muted palette, then connect those observations to focus, depth, balance, or mood. This supports the paper’s central evaluation claim: surface fluency or lexical overlap alone cannot establish aesthetic reasoning; useful evaluation must also test whether explanations are visually grounded and apply coherent aesthetic criteria.</p>
+        </div>
+      </div>
+
+      <div class="vqa-result reveal">
+        <div class="vqa-copy"><span class="finding-no">04</span><h3>Specialization helps—when it aligns with the task.</h3><p>ArtiMuse leads perception accuracy, yet several aesthetic-specific models trail general MLLMs. “Aesthetic-specific” is not a guarantee.</p></div>
+        <figure class="paper-figure vqa-paper-chart"><img src="static/images/paper/fig12_vqa_accuracy.png" alt="Figure 12 from the paper: UNIAA-Bench perception subset accuracy"><figcaption><b>Figure 12.</b> UNIAA-Bench perception accuracy; general MLLMs are blue and IAA-specific MLLMs are red.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section future-section reveal">
+      <p class="eyebrow">Design goal</p>
+      <h2>Connect reliable scores with<br><em>visually grounded reasoning.</em></h2>
+      <div class="future-flow">
+        <span>Visual evidence</span><i>→</i><span>Aesthetic criteria</span><i>→</i><span>Reasoned judgment</span><i>→</i><span>Calibrated score</span>
+      </div>
+    </section>
+
+    <section class="section resources-section">
+      <div class="resource-copy reveal">
+        <p class="eyebrow">Open resources</p>
+        <h2>Reproduce the benchmark.<br>Extend the evaluation.</h2>
+        <p>The repository provides pipelines for score prediction and language-based assessment, including inference scripts and offline metric computation.</p>
+      </div>
+      <div class="resource-links reveal delay-1">
+        <a href="https://github.com/An-Moon/Aesthetic-evaluation"><span>01</span><b>Language-based evaluation</b><small>Descriptions · perception VQA</small><i>↗</i></a>
+        <a href="https://github.com/An-Moon/Aesthetic-evaluation/tree/main/aesthetic_eval_score_framework"><span>02</span><b>Score prediction toolbox</b><small>Inference · metrics · reports</small><i>↗</i></a>
+        <a href="static/papers/Cell_Patterns__LLM_Aesthetic.pdf"><span>03</span><b>Full paper</b><small>PDF · 36 pages</small><i>↓</i></a>
+        <a href="#citation"><span>04</span><b>Citation</b><small>BibTeX placeholder</small><i>⌄</i></a>
+      </div>
+    </section>
+
+    <section id="citation" class="citation-section">
+      <div><p class="eyebrow">Citation</p><p class="citation-note">The paper does not yet provide a finalized BibTeX entry. Please use the repository and paper metadata for now.</p></div>
+      <button id="copy-title" class="copy-button" data-copy="Benchmarking Image Aesthetic Assessment from Scoring to Reasoning">Copy title</button>
+    </section>
+  </main>
+
+  <footer>
+    <span>Benchmarking Image Aesthetic Assessment from Scoring to Reasoning</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+  <script src="static/js/index.js"></script>
+  <script src="static/js/editor-runtime.js"></script>
+</body>
+</html>

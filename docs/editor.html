@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Page Visual Editor</title>
+  <link rel="stylesheet" href="static/css/editor.css">
+</head>
+<body>
+  <aside class="editor-panel">
+    <div class="editor-brand"><span>A.</span><div><b>Visual Editor</b><small>论文主页可视化编辑器</small></div></div>
+
+    <div class="editor-actions">
+      <button id="save" class="button primary">保存到主页 <span>⌘S</span></button>
+      <button id="open-page" class="button">打开正式主页 ↗</button>
+    </div>
+
+    <div class="device-switch" aria-label="预览尺寸">
+      <button data-width="100%" class="active">桌面</button>
+      <button data-width="768px">平板</button>
+      <button data-width="390px">手机</button>
+    </div>
+
+    <section class="selection-card">
+      <span class="panel-label">当前选择</span>
+      <strong id="selection-name">请在右侧点击文字</strong>
+      <code id="selection-selector">—</code>
+      <button id="toggle-edit" class="text-edit" disabled>编辑文字</button>
+      <p>点击元素进行选择；双击文字也可直接编辑。</p>
+    </section>
+
+    <fieldset id="controls" disabled>
+      <legend>Typography</legend>
+      <label>字号 <div class="input-with-unit"><input id="font-size" type="number" min="8" max="180" step="1"><span>px</span></div></label>
+      <label>字体
+        <select id="font-family">
+          <option value="">继承默认</option>
+          <option value="Georgia, 'Times New Roman', serif">Georgia / Serif</option>
+          <option value="Inter, 'Helvetica Neue', Arial, sans-serif">Inter / Sans</option>
+          <option value="Arial, sans-serif">Arial</option>
+          <option value="'Times New Roman', serif">Times New Roman</option>
+        </select>
+      </label>
+      <div class="two-col">
+        <label>字重
+          <select id="font-weight">
+            <option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option>
+          </select>
+        </label>
+        <label>颜色 <input id="color" type="color"></label>
+      </div>
+      <div class="two-col">
+        <label>行距 <input id="line-height" type="number" min="0.7" max="3" step="0.05"></label>
+        <label>字距 <div class="input-with-unit"><input id="letter-spacing" type="number" min="-10" max="30" step="0.1"><span>px</span></div></label>
+      </div>
+      <label>对齐
+        <div class="segmented" id="text-align">
+          <button data-value="left">左</button><button data-value="center">中</button><button data-value="right">右</button>
+        </div>
+      </label>
+      <legend>Spacing</legend>
+      <div class="two-col">
+        <label>上间距 <div class="input-with-unit"><input id="margin-top" type="number" min="-200" max="400"><span>px</span></div></label>
+        <label>下间距 <div class="input-with-unit"><input id="margin-bottom" type="number" min="-200" max="400"><span>px</span></div></label>
+      </div>
+      <button id="reset-current" class="button danger" type="button">恢复当前元素</button>
+    </fieldset>
+
+    <div class="panel-footer">
+      <button id="reset-all">清除全部可视化修改</button>
+      <span id="status">尚未修改</span>
+    </div>
+  </aside>
+
+  <main class="preview-area">
+    <div class="preview-toolbar"><span>Live preview</span><span id="preview-size">Desktop · fluid</span></div>
+    <div class="preview-stage"><iframe id="preview" src="./?editorPreview=1" title="论文主页实时预览"></iframe></div>
+  </main>
+  <script src="static/js/editor.js"></script>
+</body>
+</html>

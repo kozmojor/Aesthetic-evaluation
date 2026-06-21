@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "changes": {
+    "#evolution > figure > figcaption": {
+      "styles": {
+        "font-size": "12px"
+      },
+      "html": "<b>Figure 2.</b> The field’s progression from conventional score prediction to vision-language alignment and MLLM-based aesthetic reasoning."
+    },
+    "#overview > figure > figcaption": {
+      "styles": {
+        "font-size": "12px"
+      }
+    },
+    "#taxonomy-figure > figcaption": {
+      "styles": {
+        "font-size": "12px"
+      }
+    },
+    "#benchmark > figure > figcaption": {
+      "styles": {
+        "font-size": "12px"
+      }
+    },
+    "#findings > div:nth-of-type(3) > figure:nth-of-type(1) > figcaption": {
+      "styles": {
+        "font-size": "12px"
+      }
+    },
+    "#findings > div:nth-of-type(3) > figure:nth-of-type(2) > figcaption": {
+      "styles": {
+        "font-size": "12px"
+      }
+    },
+    "#top > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > span:nth-of-type(1)": {
+      "styles": {
+        "font-size": "13px"
+      }
+    },
+    "#top > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > span:nth-of-type(2)": {
+      "styles": {
+        "font-size": "13px"
+      }
+    },
+    "#top > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > span:nth-of-type(3)": {
+      "styles": {
+        "font-size": "13px"
+      }
+    },
+    "#top > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > span:nth-of-type(4)": {
+      "styles": {
+        "font-size": "13px"
+      },
+      "html": "<sup>4</sup> Singapore University of Technology and Design"
+    },
+    "#top > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > small": {
+      "styles": {
+        "font-size": "13px"
+      },
+      "html": "<sup>*</sup> Corresponding author: kjwu@hust.edu.cn"
+    }
+  }
+}
